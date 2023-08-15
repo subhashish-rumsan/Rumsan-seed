@@ -1,6 +1,6 @@
 ### Key Features:
 
-- Fastify Integration: Set up the project using the @nestjs/fastify for a fast, efficient, and scalable API framework.
+- Fastify Integration: Set up the project using the @nestjs/fastify for a fast, efficient, and scalable API framework. ✅
 
 - Logging: Comprehensive application monitoring using the @nestjs/common logger.
 
