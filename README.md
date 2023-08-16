@@ -44,6 +44,34 @@ Dive deep into the core of NestJS with this hands-on project that touches the fu
 - Linter Configuration: Maintain a clean and consistent codebase with tslint, eslint, and prettier.
 - Thorough Testing: Ensure the reliability of your application with integration and unit testing using Jest.
 
+## Folder Structure
+
+Below is a description of the primary folders in this project:
+src/
+├── config/ # Configuration settings and environment variables
+├── decorators/ # Custom decorators for routes, guards, etc.
+├── filters/ # Exception filters
+├── guards/ # Guards for routes
+├── interceptors/ # Custom interceptors
+├── middleware/ # Middlewares for handling requests
+├── modules/ # Feature modules
+│ ├── user/ # User module (e.g.)
+│ └── auth/ # Authentication module (e.g.)
+├── shared/ # Shared utilities, models, and services
+├── app.controller.ts # Main application controller
+├── app.service.ts # Main application service
+└── main.ts # Application entry point
+
+### Details:
+
+- `config/`: Holds the configuration files. It includes settings, constants, and environment variable handling.
+- `decorators/`: Contains any custom decorators that are used across the application.
+- `filters/`: Exception filters for handling exceptions across the application or specific modules.
+- `guards/`: Defines route guards to restrict access to certain routes based on custom logic.
+- `interceptors/`: Interceptors allow you to transform the response sent back to the client or perform specific actions before the route handler is executed.
+- `middleware/`: Middlewares are functions that have access to the request and response objects, and the next middleware function in the cycle.
+- `modules/`: The application is broken down into feature modules, and each feature has its own folder under this directory. For instance, the `user/` module might handle user-related logic, while the `auth/` module handles authentication.
+- `shared/`: A directory for shared utilities, services, DTOs, interfaces, and any other shared code.
 ## Installation
 
 ```bash
