@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
+import { UsersModule } from './users/users.module';
 import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
 // import * as Joi from 'joi';
@@ -34,8 +33,7 @@ import databaseConfig from './config/database.config';
       //   abortEarly: true,
       // },
     }),
+    UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
