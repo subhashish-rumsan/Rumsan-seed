@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
+// import * as Joi from 'joi';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -16,8 +17,16 @@ import databaseConfig from './config/database.config';
       load: [configuration, databaseConfig],
       // # NOTE: Making configuration global
       isGlobal: true,
-      // #NOTE: Increasing the performance of environmental variable
+      // #NOTE: Increasing the performance of environment variable
       cache: true,
+
+      // #NOTE: Testing validation if in-case environment variables are absent
+      // validationSchema: Joi.object({
+      //   NODE_ENV: Joi.string()
+      //     .valid('development', 'production', 'staging')
+      //     .default('development'),
+      //   PORT: Joi.number().default(3000),
+      // }),
     }),
   ],
   controllers: [AppController],
