@@ -16,6 +16,8 @@ import databaseConfig from './config/database.config';
       load: [configuration, databaseConfig],
       // # NOTE: Making configuration global
       isGlobal: true,
+      // #NOTE: Increasing the performance of environmental variable
+      cache: true,
     }),
   ],
   controllers: [AppController],
