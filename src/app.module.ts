@@ -1,10 +1,10 @@
-import { Module, ValidationPipe } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
-import { EnvironmentVariables } from './env-var-dto';
+import { validate } from './env-var-dto';
 // import * as Joi from 'joi';
 @Module({
   imports: [
@@ -16,15 +16,7 @@ import { EnvironmentVariables } from './env-var-dto';
       // #NOTE: Increasing the performance of environment variable
       cache: true,
       // #NOTE: Validation using class-validator and class-transformer
-      validate: (configuration: EnvironmentVariables) => {
-        const validationPipe = new ValidationPipe({
-          transform: true,
-          whitelist: true,
-          forbidNonWhitelisted: true,
-          skipMissingProperties: false,
-        });
-        return validationPipe.transform(configuration, { type: 'body' });
-      },
+      validate,
     }),
   ],
   controllers: [AppController],
