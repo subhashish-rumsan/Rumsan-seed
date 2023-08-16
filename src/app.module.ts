@@ -27,6 +27,12 @@ import databaseConfig from './config/database.config';
       //     .default('development'),
       //   PORT: Joi.number().default(3000),
       // }),
+
+      // NOTE: Added validation options to control validation behaviour
+      // validationOptions: {
+      //   allowUnknown: false,
+      //   abortEarly: true,
+      // },
     }),
   ],
   controllers: [AppController],
