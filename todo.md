@@ -5,13 +5,7 @@
 - Logging: Comprehensive application monitoring using the @nestjs/common logger.
 
 - Swagger Integration: Implement API documentation with @nestjs/swagger. Plus, enhance security with built-in authorization support.
-<<<<<<< HEAD
 - Environment Configuration: Embed environment-specific variables using the @nestjs/config and dotenv for more secure and scalable apps. ✅
-=======
-
-- Environment Configuration: Embed environment-specific variables using the @nestjs/config and dotenv for more secure and scalable apps.
-
->>>>>>> 5e9c3013aeefb27002abf6d060062fd1a6624c87
 - API Versioning: Flexible routing with support for multiple API versions. By default, route to /api/v1.
 
 - Role-Based Access Control (RBAC): Secure your application resources by defining roles and permissions.
