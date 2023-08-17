@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
+import { UsersModule } from './users/users.module';
 import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
 import { validate } from './env-var-dto';
@@ -18,8 +17,7 @@ import { validate } from './env-var-dto';
       // #NOTE: Validation using class-validator and class-transformer
       validate,
     }),
+    UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

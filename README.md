@@ -72,6 +72,33 @@ src/
 - `middleware/`: Middlewares are functions that have access to the request and response objects, and the next middleware function in the cycle.
 - `modules/`: The application is broken down into feature modules, and each feature has its own folder under this directory. For instance, the `user/` module might handle user-related logic, while the `auth/` module handles authentication.
 - `shared/`: A directory for shared utilities, services, DTOs, interfaces, and any other shared code.
+<<<<<<< HEAD
+
+## 🛠 NestJS CLI - Automated Module Generation
+
+The NestJS Command Line Interface (CLI) offers a suite of commands designed to help scaffold and manage your application structure. It facilitates the quick generation of modules, services, controllers, and various other components.
+
+### 1. **Installation of NestJS CLI**
+
+If the NestJS CLI isn't already set up, you can install it globally with:
+
+```bash
+npm install -g @nestjs/cli
+```
+### **Generating a module**
+To create a new module using the CLI, utilize the generate (or g for short) command:
+```bash
+nest g module <ModuleName>
+```
+ ### **Generating Additional Components**
+ The CLI also enables the generation of controllers, services, and more, each associated with specific modules:
+ ```bash
+nest g controller <ModuleName>
+nest g service <ModuleName>
+```
+
+=======
+>>>>>>> 7592b8b115ec0b743d695c7421b49264d87191f7
 ## Installation
 
 ```bash
