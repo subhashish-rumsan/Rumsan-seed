@@ -15,7 +15,7 @@ export class UsersService {
       this.logger.log(`Retrieved all users`);
       return this.users;
     } catch (error) {
-      // this.logger.error(error);
+      this.logger.error(error);
       throw new Error(error);
     }
   }
