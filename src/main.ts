@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 import {
   FastifyAdapter,
@@ -25,6 +26,14 @@ async function bootstrap() {
     defaultVersion: '1',
   });
   app.useGlobalFilters(new GlobalExecutionFilter());
+  const config = new DocumentBuilder()
+    .setTitle('Cats example')
+    .setDescription('The cats API description')
+    .setVersion('1.0')
+    .addTag('cats')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
   const PORT = configService.get<number>('DEV_PORT') || 3000;
   await app.listen(PORT);
 }
