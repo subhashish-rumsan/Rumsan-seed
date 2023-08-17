@@ -6,9 +6,11 @@ import {
 } from '@nestjs/platform-fastify';
 import { ConfigService } from '@nestjs/config';
 import { VersioningType } from '@nestjs/common';
+import { GlobalExecutionFilter } from './Errors/exception.filter';
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
+    // eslint-disable-next-line prettier/prettier
     new FastifyAdapter()
   );
   const configService = app.get(ConfigService);
@@ -17,6 +19,7 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: '1',
   });
+  app.useGlobalFilters(new GlobalExecutionFilter());
   const PORT = configService.get<number>('DEV_PORT') || 3000;
   await app.listen(PORT);
 }
