@@ -1,12 +1,24 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
 import { validate } from './env-var-dto';
-// import * as Joi from 'joi';
+import { LoggerModule } from 'nestjs-pino';
+
 @Module({
   imports: [
+    LoggerModule.forRoot({
+      pinoHttp: {
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            singleLine: true,
+          },
+        },
+      },
+    }),
     ConfigModule.forRoot({
       // #NOTE: Trying loading setup for .env files
       load: [configuration, databaseConfig],

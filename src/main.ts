@@ -1,5 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -11,8 +13,11 @@ async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     // eslint-disable-next-line prettier/prettier
-    new FastifyAdapter()
+    new FastifyAdapter(),
+    { bufferLogs: true }
   );
+  app.useLogger(app.get(Logger));
+  app.useGlobalInterceptors(new LoggerErrorInterceptor());
   const configService = app.get(ConfigService);
   // NOTE: Setting up global prefix. By deafult the version contains api/v1
   app.setGlobalPrefix('api').enableVersioning({
