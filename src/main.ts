@@ -9,7 +9,7 @@ import { VersioningType } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter(),
+    new FastifyAdapter()
   );
   const configService = app.get(ConfigService);
   // NOTE: Setting up global prefix. By deafult the version contains api/v1
