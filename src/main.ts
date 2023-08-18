@@ -27,10 +27,10 @@ async function bootstrap() {
   });
   app.useGlobalFilters(new GlobalExecutionFilter());
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('NEST JS Foundation Application')
+    .setDescription('The User Management System API')
     .setVersion('1.0')
-    .addTag('cats')
+    .addTag('users')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
