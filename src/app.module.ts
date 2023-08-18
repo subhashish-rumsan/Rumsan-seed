@@ -6,6 +6,8 @@ import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
 import { validate } from './env-var-dto';
 import { LoggerModule } from 'nestjs-pino';
+import { PrismaModule } from './prisma/prisma.module';
+import { BlogsModule } from './blogs/blogs.module';
 
 @Module({
   imports: [
@@ -30,6 +32,8 @@ import { LoggerModule } from 'nestjs-pino';
       validate,
     }),
     UsersModule,
+    PrismaModule,
+    BlogsModule,
   ],
 })
 export class AppModule {}
