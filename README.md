@@ -45,7 +45,7 @@ Dive deep into the core of NestJS with this hands-on project that touches the fu
 - Thorough Testing: Ensure the reliability of your application with integration and unit testing using Jest.
 
 ## Folder Structure
-
+```
 Below is a description of the primary folders in this project:
 src/
 ├── config/ # Configuration settings and environment variables
@@ -61,6 +61,7 @@ src/
 ├── app.controller.ts # Main application controller
 ├── app.service.ts # Main application service
 └── main.ts # Application entry point
+```
 
 ### Details:
 
@@ -72,7 +73,6 @@ src/
 - `middleware/`: Middlewares are functions that have access to the request and response objects, and the next middleware function in the cycle.
 - `modules/`: The application is broken down into feature modules, and each feature has its own folder under this directory. For instance, the `user/` module might handle user-related logic, while the `auth/` module handles authentication.
 - `shared/`: A directory for shared utilities, services, DTOs, interfaces, and any other shared code.
-<<<<<<< HEAD
 
 ## 🛠 NestJS CLI - Automated Module Generation
 
@@ -97,8 +97,6 @@ nest g controller <ModuleName>
 nest g service <ModuleName>
 ```
 
-=======
->>>>>>> 7592b8b115ec0b743d695c7421b49264d87191f7
 ## Installation
 
 ```bash
