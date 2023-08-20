@@ -1,26 +1,15 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
 import { validate } from './env-var-dto';
-import { LoggerModule } from 'nestjs-pino';
 import { PrismaModule } from './prisma/prisma.module';
 import { BlogsModule } from './blogs/blogs.module';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 @Module({
   imports: [
-    LoggerModule.forRoot({
-      pinoHttp: {
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            singleLine: true,
-          },
-        },
-      },
-    }),
     ConfigModule.forRoot({
       // #NOTE: Trying loading setup for .env files
       load: [configuration, databaseConfig],
@@ -36,4 +25,8 @@ import { BlogsModule } from './blogs/blogs.module';
     BlogsModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}

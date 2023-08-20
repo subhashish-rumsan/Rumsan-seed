@@ -1,15 +1,14 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { ConfigService } from '@nestjs/config';
-import { VersioningType } from '@nestjs/common';
+import { Logger, VersioningType } from '@nestjs/common';
 import { GlobalExecutionFilter } from './Errors/exception.filter';
+import { setupSwagger } from './swagger';
+
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
@@ -17,8 +16,7 @@ async function bootstrap() {
     new FastifyAdapter(),
     { bufferLogs: true }
   );
-  app.useLogger(app.get(Logger));
-  app.useGlobalInterceptors(new LoggerErrorInterceptor());
+  const logger = new Logger('bootstrap');
   const configService = app.get(ConfigService);
   // NOTE: Setting up global prefix. By deafult the version contains api/v1
   app.setGlobalPrefix('api').enableVersioning({
@@ -26,15 +24,9 @@ async function bootstrap() {
     defaultVersion: '1',
   });
   app.useGlobalFilters(new GlobalExecutionFilter());
-  const config = new DocumentBuilder()
-    .setTitle('NEST JS Foundation Application')
-    .setDescription('The User Management System API')
-    .setVersion('1.0')
-    .addTag('users')
-    .build();
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  setupSwagger(app);
   const PORT = configService.get<number>('DEV_PORT') || 3000;
   await app.listen(PORT);
+  logger.log(`Application listening on port ${PORT}`);
 }
 bootstrap();
