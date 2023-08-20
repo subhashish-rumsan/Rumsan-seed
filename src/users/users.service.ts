@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { UserProfile as Users } from './users.interface';
 @Injectable()
 export class UsersService {
-  private readonly logger = new Logger('User services');
+  private readonly logger = new Logger(UsersService.name);
 
   private readonly users: Users[] = [
     {

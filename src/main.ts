@@ -1,7 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-// import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-// import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 import {
   FastifyAdapter,
   NestFastifyApplication,
@@ -10,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { Logger, VersioningType } from '@nestjs/common';
 import { GlobalExecutionFilter } from './Errors/exception.filter';
 import { setupSwagger } from './swagger';
+
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
@@ -18,8 +17,6 @@ async function bootstrap() {
     { bufferLogs: true }
   );
   const logger = new Logger('bootstrap');
-  // app.useLogger(app.get(Logger));
-  // app.useGlobalInterceptors(new LoggerErrorInterceptor());
   const configService = app.get(ConfigService);
   // NOTE: Setting up global prefix. By deafult the version contains api/v1
   app.setGlobalPrefix('api').enableVersioning({
