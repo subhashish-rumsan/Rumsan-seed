@@ -43,7 +43,7 @@ export class BlogsService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} blog`;
+    return this.prisma.blog.delete({ where: { id } });
   }
 
   findDrafts() {
