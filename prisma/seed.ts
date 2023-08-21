@@ -1,38 +1,34 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { PrismaClient } from '@prisma/client';
 
-// initialize Prisma Client
 const prisma = new PrismaClient();
 
 async function main() {
-  // create two dummy users
-  const user1 = await prisma.user.upsert({
-    where: { username: 'admin' },
+  // create two dummy articles
+  const post1 = await prisma.blog.upsert({
+    where: { title: 'Prisma Adds Support for MongoDB' },
     update: {},
     create: {
-      username: 'admin',
-      password: 'securepassword123',
-      name: 'Administrator',
-      age: 30,
-      lastLoginDate: new Date(),
-      token: 'sampleToken123',
+      title: 'Prisma Adds Support for MongoDB',
+      body: 'Support for MongoDB has been one of the most requested features since the initial release of...',
+      description:
+        "We are excited to share that today's Prisma ORM release adds stable support for MongoDB!",
+      published: false,
     },
   });
 
-  const user2 = await prisma.user.upsert({
-    where: { username: 'john_doe' },
+  const post2 = await prisma.blog.upsert({
+    where: { title: "What's new in Prisma? (Q1/22)" },
     update: {},
     create: {
-      username: 'john_doe',
-      password: 'password123',
-      name: 'John Doe',
-      age: 25,
-      lastLoginDate: new Date(),
-      token: 'sampleToken456',
+      title: "What's new in Prisma? (Q1/22)",
+      body: 'Our engineers have been working hard, issuing new releases with many improvements...',
+      description:
+        'Learn about everything in the Prisma ecosystem and community from January to March 2022.',
+      published: true,
     },
   });
 
-  console.log({ user1, user2 });
+  console.log({ post1, post2 });
 }
 
 // execute the main function
