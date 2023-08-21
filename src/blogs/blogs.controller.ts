@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { BlogsService } from './blogs.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
-import { UpdateBlogDto } from './dto/update-blog.dto';
+// import { UpdateBlogDto } from './dto/update-blog.dto';
 
 @Controller('blogs')
 export class BlogsController {
@@ -23,6 +23,11 @@ export class BlogsController {
   @Get()
   findAll() {
     return this.blogsService.findAll();
+  }
+
+  @Get('drafts')
+  findDrafts() {
+    return this.blogsService.findDrafts();
   }
 
   @Get(':id')

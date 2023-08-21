@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-// import { CreateBlogDto } from './dto/create-blog.dto';
-// import { UpdateBlogDto } from './dto/update-blog.dto';
+import { CreateBlogDto } from './dto/create-blog.dto';
+import { UpdateBlogDto } from './dto/update-blog.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -9,9 +9,13 @@ export class BlogsService {
 
   private readonly logger = new Logger('Blogs Logger');
 
-  // create(createBlogDto: CreateBlogDto) {
-  //   return 'This action adds a new blog';
-  // }
+  create(createBlogDto: CreateBlogDto) {
+    try {
+      return this.prisma.blog.create({ data: createBlogDto });
+    } catch (error) {
+      this.logger.error('Error wile creating a new blog');
+    }
+  }
 
   findAll() {
     try {
@@ -23,14 +27,31 @@ export class BlogsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} blog`;
+    try {
+      this.logger.log(`Retreiving blog with ${id}`);
+      return this.prisma.blog.findUnique({ where: { id } });
+    } catch (error) {
+      this.logger.log(`Error on retrieving data with id ${id}`);
+    }
   }
 
-  // update(id: number, updateBlogDto: UpdateBlogDto) {
-  //   return `This action updates a #${id} blog`;
-  // }
+  update(id: number, updateBlogDto: UpdateBlogDto) {
+    return this.prisma.blog.update({
+      where: { id },
+      data: updateBlogDto,
+    });
+  }
 
   remove(id: number) {
     return `This action removes a #${id} blog`;
+  }
+
+  findDrafts() {
+    try {
+      this.logger.log('Retreiving data for drafts');
+      return this.prisma.blog.findMany({ where: { published: false } });
+    } catch (error) {
+      this.logger.error('Error while retreiving drafts');
+    }
   }
 }
