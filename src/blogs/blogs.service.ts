@@ -36,10 +36,15 @@ export class BlogsService {
   }
 
   update(id: number, updateBlogDto: UpdateBlogDto) {
-    return this.prisma.blog.update({
-      where: { id },
-      data: updateBlogDto,
-    });
+    try {
+      this.logger.log('Updating data into the blog');
+      return this.prisma.blog.update({
+        where: { id },
+        data: updateBlogDto,
+      });
+    } catch (error) {
+      this.logger.error('Error while updating data');
+    }
   }
 
   remove(id: number) {
