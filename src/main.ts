@@ -8,6 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { Logger, VersioningType } from '@nestjs/common';
 import { GlobalExecutionFilter } from './Errors/exception.filter';
 import { setupSwagger } from './swagger';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -23,6 +24,7 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: '1',
   });
+  app.use(new ValidationPipe());
   app.useGlobalFilters(new GlobalExecutionFilter());
   setupSwagger(app);
   const PORT = configService.get<number>('DEV_PORT') || 3000;
