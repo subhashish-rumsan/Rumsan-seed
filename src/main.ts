@@ -1,4 +1,4 @@
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {
   FastifyAdapter,
@@ -9,6 +9,7 @@ import { Logger, VersioningType } from '@nestjs/common';
 import { GlobalExecutionFilter } from './Errors/exception.filter';
 import { setupSwagger } from './swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { PrismaClientExceptionFilter } from './prisma-client-exception/prisma-client-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -27,6 +28,8 @@ async function bootstrap() {
   });
 
   app.useGlobalFilters(new GlobalExecutionFilter());
+  const { httpAdapter } = app.get(HttpAdapterHost);
+  app.useGlobalFilters(new PrismaClientExceptionFilter(httpAdapter));
   setupSwagger(app);
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   const PORT = configService.get<number>('DEV_PORT') || 3000;

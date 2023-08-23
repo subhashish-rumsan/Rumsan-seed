@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  NotFoundException,
 } from '@nestjs/common';
 import { BlogsService } from './blogs.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
@@ -39,8 +40,10 @@ export class BlogsController {
 
   @Get(':id')
   @ApiOkResponse({ type: BlogsEntity, isArray: true })
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.blogsService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const blog = await this.blogsService.findOne(id);
+    if (!blog) throw new NotFoundException(`Blog with id ${id} not found!`);
+    return blog;
   }
 
   @Patch(':id')
