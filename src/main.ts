@@ -17,6 +17,7 @@ async function bootstrap() {
     new FastifyAdapter(),
     { bufferLogs: true }
   );
+
   const logger = new Logger('bootstrap');
   const configService = app.get(ConfigService);
   // NOTE: Setting up global prefix. By deafult the version contains api/v1
@@ -24,9 +25,10 @@ async function bootstrap() {
     type: VersioningType.URI,
     defaultVersion: '1',
   });
-  app.use(new ValidationPipe());
+
   app.useGlobalFilters(new GlobalExecutionFilter());
   setupSwagger(app);
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   const PORT = configService.get<number>('DEV_PORT') || 3000;
   await app.listen(PORT);
   logger.log(`Application listening on port ${PORT}`);
