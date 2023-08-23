@@ -2,9 +2,9 @@
 
 - Fastify Integration: Set up the project using the @nestjs/fastify for a fast, efficient, and scalable API framework. ✅
 
-- Logging: Comprehensive application monitoring using the @nestjs/common logger.
+- Logging: Comprehensive application monitoring using the @nestjs/common logger. ✅
 
-- Swagger Integration: Implement API documentation with @nestjs/swagger. Plus, enhance security with built-in authorization support.
+- Swagger Integration: Implement API documentation with @nestjs/swagger. Plus, enhance security with built-in authorization support. ✅
 - Environment Configuration: Embed environment-specific variables using the @nestjs/config and dotenv for more secure and scalable apps. ✅
 - API Versioning: Flexible routing with support for multiple API versions. By default, route to /api/v1. ✅
 
@@ -12,7 +12,7 @@
 
 - Docker Support: Ensure consistent runtime environments and scalability with Docker containerization.
 
-- Global Exception Handling: A custom global exception filter for capturing and handling application-wide errors gracefully.
+- Global Exception Handling: A custom global exception filter for capturing and handling application-wide errors gracefully. ✅
 
 - User Authentication: Protect user data and application resources with comprehensive authentication measures.
 
@@ -24,6 +24,6 @@
 
 - Database Upgrade: Transition from a lightweight Sqlite database to a more robust Prisma/Postgres setup.
 
-- Linter Configuration: Maintain a clean and consistent codebase with tslint, eslint, and prettier.
+- Linter Configuration: Maintain a clean and consistent codebase with tslint, eslint, and prettier. ✅
 
 - Thorough Testing: Ensure the reliability of your application with integration and unit testing using Jest.
