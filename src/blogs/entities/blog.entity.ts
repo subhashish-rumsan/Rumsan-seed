@@ -24,4 +24,7 @@ export class BlogsEntity implements Blog {
 
   @ApiProperty()
   updatedAt: Date;
+
+  @ApiProperty({ required: false, nullable: true })
+  userId: number | null;
 }
