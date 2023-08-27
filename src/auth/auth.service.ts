@@ -1,5 +1,6 @@
 import {
   Injectable,
+  Logger,
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -14,6 +15,8 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
+  private readonly logger = new Logger('Auth Service');
+
   async login(email: string, password: string): Promise<AuthEntity> {
     const user = await this.prisma.user.findUnique({ where: { email: email } });
     if (!user) {
@@ -23,6 +26,7 @@ export class AuthService {
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid password');
     }
+    this.logger.log(`JWT token send to user!`);
     return {
       accessToken: this.jwtService.sign({ userId: user.id }),
     };
