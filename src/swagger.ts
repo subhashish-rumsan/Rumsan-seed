@@ -13,6 +13,6 @@ export function setupSwagger(app: INestApplication) {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/documentation', app, document);
   logger.log(
-    `Swagger Documentation running on the url http://localhost:${port}/api/docs`
+    `Swagger Documentation running on the url http://localhost:${port}/api/documentation`
   );
 }

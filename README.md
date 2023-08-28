@@ -96,7 +96,23 @@ nest g module <ModuleName>
 nest g controller <ModuleName>
 nest g service <ModuleName>
 ```
+ ### **Running a POSTGRESQL INSTANCE**
+ ```bash
+docker-compose up
+```
+ ### **MIGRATING THE DATABASE**
+ ```bash
+npx prisma migrate dev --name "init"
+```
+ ### **SEEDING THE DATABASE**
+ ```bash
+npx prisma db seed
+```
 
+### **Generating NEST RESOURCES**
+```bash
+npx nest generate resource
+```
 ## Installation
 
 ```bash

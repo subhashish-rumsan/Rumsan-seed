@@ -4,7 +4,10 @@ import { UsersModule } from './users/users.module';
 import configuration from './config/configuration';
 import databaseConfig from './config/database.config';
 import { validate } from './env-var-dto';
+import { PrismaModule } from './prisma/prisma.module';
+import { BlogsModule } from './blogs/blogs.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +22,9 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
       validate,
     }),
     UsersModule,
+    PrismaModule,
+    BlogsModule,
+    AuthModule,
   ],
 })
 export class AppModule {

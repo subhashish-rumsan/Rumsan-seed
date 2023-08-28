@@ -1,43 +1,48 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { UserProfile as Users } from './users.interface';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { PrismaService } from 'src/prisma/prisma.service';
+
 @Injectable()
 export class UsersService {
+  constructor(private prisma: PrismaService) {}
+
   private readonly logger = new Logger(UsersService.name);
 
-  private readonly users: Users[] = [
-    {
-      username: 'johnDoe123',
-      password: 'password123',
-      name: 'John Doe',
-      age: 30,
-      lastLoginDate: new Date('2023-01-01T10:30:00'),
-      token: 'token1',
-    },
-    {
-      username: 'aliceSmith456',
-      password: 'password456',
-      name: 'Alice Smith',
-      age: 25,
-      lastLoginDate: new Date('2023-01-15T15:45:00'),
-      token: 'token2',
-    },
-    {
-      username: 'bobJohnson789',
-      password: 'password789',
-      name: 'Bob Johnson',
-      age: 28,
-      lastLoginDate: new Date('2023-02-01T12:15:00'),
-      token: 'token3',
-    },
-  ];
-
-  findAll(): Users[] {
+  create(createUserDto: CreateUserDto) {
     try {
-      this.logger.log(`Retrieved all users`);
-      return this.users;
+      this.logger.log('Creating a user');
+      return this.prisma.user.create({ data: createUserDto });
     } catch (error) {
-      this.logger.error(error);
-      throw new Error(error);
+      this.logger.error('Error while creating a user');
     }
+  }
+
+  findAll() {
+    try {
+      this.logger.log('Retrieving all users');
+      return this.prisma.user.findMany();
+    } catch (error) {}
+  }
+
+  findOne(id: number) {
+    try {
+      this.logger.log(`Finding user with id ${id}`);
+      return this.prisma.user.findUnique({ where: { id } });
+    } catch (error) {}
+  }
+
+  update(id: number, updateUserDto: UpdateUserDto) {
+    try {
+      this.logger.log(`Updating user with id ${id}`);
+      return this.prisma.user.update({ where: { id }, data: updateUserDto });
+    } catch (error) {}
+  }
+
+  remove(id: number) {
+    try {
+      this.logger.warn(`Deleting user with ${id}`);
+      return `This action removes a #${id} user`;
+    } catch (error) {}
   }
 }
